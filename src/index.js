@@ -165,3 +165,32 @@ $approveBtn.addEventListener('click', () => {
 });
 
 
+// 5. 폰트 사이즈 조절 버튼
+const $increaseFontBtn = document.getElementById('increase-font-btn');
+const $decreaseFontBtn = document.getElementById('decrease-font-btn');
+
+const $html = document.documentElement;
+
+const MAX_FONT_SIZE = 20;
+const MIN_FONT_SIZE = 12;
+
+const getHtmlFontSize = () => {
+  return parseFloat(window.getComputedStyle($html).fontSize);
+};
+
+$increaseFontBtn.addEventListener('click', () => {
+  onClickFontSizeControl('increase');
+});
+
+$decreaseFontBtn.addEventListener('click', () => {
+  onClickFontSizeControl('decrease');
+});
+
+const onClickFontSizeControl = (flag) => {
+  const fontSize = getHtmlFontSize();
+  let newFontSize = flag === 'increase' ? fontSize + 1 : fontSize - 1;
+  $html.style.fontSize = newFontSize;
+
+  $increaseFontBtn.disabled = newFontSize >= MAX_FONT_SIZE
+  $decreaseFontBtn.disabled = newFontSize <= MIN_FONT_SIZE
+};
